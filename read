@@ -1,0 +1,131 @@
+# Recipe and Ingredient Knowledge Graph
+
+## Overview
+
+This project implements a recipe recommendation system using a knowledge graph. The system models relationships between recipes, ingredients, and tags. Users can query what they can cook, find similar recipes, and explore ingredient relationships.
+
+The application is implemented in Java using graph concepts, BFS traversal, and efficient data structures.
+
+---
+
+## Features
+
+- Find recipes based on available ingredients
+- Suggest nearly cookable recipes (missing ≤ 1 ingredient)
+- Compute similarity between recipes using Jaccard similarity
+- Filter recipes by tags (e.g., vegan, fast)
+- Add new recipes dynamically
+- Display recipe-ingredient relationships
+- Support ingredient substitutions
+- Load dataset from JSON file
+
+---
+
+## Data Model
+
+The system represents a heterogeneous graph with three logical node types:
+
+- Recipe
+- Ingredient
+- Tag
+
+Edges:
+- Recipe → Ingredient (contains)
+- Recipe → Tag (has-tag)
+- Ingredient → Ingredient (substitutes-for)
+
+Internally, the graph is implemented using:
+- HashMap for fast lookup
+- Sets for relationships
+
+---
+
+## Commands
+
+what-can-i-cook <ingredients>  
+similar-to <recipe>  
+filter <tag>  
+substitutes-for <ingredient>  
+add-recipe  
+ingredient-graph  
+exit  
+
+---
+
+## Example Usage
+
+>> what-can-i-cook tomato cheese dough  
+You can cook: Pizza  
+
+>> similar-to Pizza  
+Pasta -> 0.66  
+
+>> filter vegan  
+Salad  
+Falafel  
+
+>> ingredient-graph  
+Pizza -> [cheese, tomato, dough]  
+
+---
+
+## Complexity Analysis
+
+### BFS (what-can-i-cook)
+
+Time Complexity: O(V + E)  
+Space Complexity: O(V)  
+
+Where V is the number of nodes and E is the number of edges.
+
+---
+
+### Jaccard Similarity
+
+Time Complexity: O(n + m)  
+Space Complexity: O(1)  
+
+Where n and m are sizes of ingredient sets.
+
+---
+
+### Recipe Matching
+
+Time Complexity: O(R × I)  
+
+Where R is the number of recipes and I is the average number of ingredients.
+
+---
+
+### HashMap Lookup
+
+Time Complexity: O(1) (average)
+
+---
+
+### Filter by Tag
+
+Time Complexity: O(R)
+
+---
+
+### Add Recipe
+
+Time Complexity: O(I + T)
+
+Where I is number of ingredients and T is number of tags.
+
+---
+
+## Technologies Used
+
+- Java (OOP)
+- HashMap and Set
+- BFS (graph traversal)
+- JSON file handling
+
+---
+
+## Conclusion
+
+This project demonstrates how graph-based models can be applied to real-world problems such as recipe recommendation systems. It combines data structures, algorithms, and user interaction into a complete application.
