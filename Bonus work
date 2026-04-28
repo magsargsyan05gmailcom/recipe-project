@@ -1,0 +1,76 @@
+KnowledgeGraph.java
+
+public void mealPlanner(Set<String> userIngredients, int mealsCount) {
+
+    List<Recipe> result = new ArrayList<>();
+
+    Map<Recipe, Integer> scoreMap = new HashMap<>();
+
+    for (Recipe r : recipes.values()) {
+
+        int match = 0;
+
+        for (String ing : r.ingredients) {
+            if (userIngredients.contains(ing)) {
+                match++;
+            }
+        }
+
+        scoreMap.put(r, match);
+    }
+
+    // sort by score descending
+    List<Map.Entry<Recipe, Integer>> list = new ArrayList<>(scoreMap.entrySet());
+
+    list.sort((a, b) -> b.getValue() - a.getValue());
+
+    int count = 0;
+
+    for (Map.Entry<Recipe, Integer> entry : list) {
+
+        if (count >= mealsCount) break;
+
+        if (entry.getValue() > 0) {
+            System.out.println("Meal: " + entry.getKey().name + 
+                               " (score=" + entry.getValue() + ")");
+            count++;
+        }
+    }
+
+    if (count == 0) {
+        System.out.println("No suitable meals found.");
+    }
+}
+
+
+
+
+Main.java
+else if (input.startsWith("meal-plan")) {
+
+    String[] parts = input.split(" ");
+
+    int meals = Integer.parseInt(parts[1]);
+
+    Set<String> ing = new HashSet<>(
+        Arrays.asList(parts).subList(2, parts.length)
+    );
+
+    graph.mealPlanner(ing, meals);
+}
+
+
+
+Complexity
+
+
+Meal Planner Complexity:
+
+Time Complexity: O(R × I + R log R)
+
+Where:
+R = number of recipes
+I = ingredients per recipe
+
+Explanation:
+We compute scores in O(R × I) and sort in O(R log R).
