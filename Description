@@ -1,1 +1,210 @@
+🇬🇧 Project Description (English Version) 
 
+🔹 Short Description 
+
+This project implements a Recipe and Ingredient Knowledge Graph system that models relationships between recipes, ingredients, and dietary tags. The system allows users to query what recipes they can cook based on available ingredients, find similar recipes, and explore ingredient substitutions. 
+
+The application is built using graph data structures, efficient lookup techniques, and traversal algorithms to simulate real-world cooking recommendation systems such as Yummly. 
+
+ 
+
+🎯 Objectives 
+
+Model a heterogeneous graph with three node types: Recipe, Ingredient, Tag  
+
+Represent relationships using directed edges:  
+
+Recipe → Ingredient (contains)  
+
+Recipe → Tag (has-tag)  
+
+Ingredient → Ingredient (substitutes-for)  
+
+Load structured data from a JSON dataset (≥60 recipes, ≥80 ingredients)  
+
+Implement BFS traversal to find cookable or nearly cookable recipes  
+
+Compute similarity between recipes using Jaccard similarity  
+
+Provide a command-based interface for querying the system  
+
+Handle edge cases such as missing ingredients, empty tags, and substitution chains  
+
+ 
+
+🧠 Data Structures and Algorithms 
+
+Data Structures 
+
+HashMap<String, Recipe> 
+Used for O(1) lookup of recipes  
+
+HashMap<String, Set<String>> 
+Used to map ingredients to recipes and substitutions  
+
+Set<String> 
+Used to store unique ingredients and tags efficiently  
+
+Graph Representation 
+Implemented using adjacency lists for scalability and memory efficiency  
+
+ 
+
+Algorithms 
+
+Breadth-First Search (BFS) 
+Used to traverse the graph starting from available ingredients to discover reachable recipes  
+
+Jaccard Similarity Algorithm 
+Used to compute similarity between two recipes: 
+
+similarity = |intersection| / |union| 
+
+Hash-based filtering 
+Used for fast ingredient matching and feasibility checks  
+
+ 
+
+⚙️ Overall Approach 
+
+The system constructs a heterogeneous directed graph from a structured dataset. Each recipe node is connected to its ingredients and tags, while ingredient nodes may connect to other ingredients through substitution relationships. 
+
+When a user provides available ingredients, the system performs a BFS traversal to explore reachable recipes. It checks whether recipes are fully cookable or missing at most one ingredient. 
+
+Similarity queries are handled using set operations to compute Jaccard similarity. Filtering operations use tag-based indexing for efficient retrieval. 
+
+The architecture prioritizes: 
+
+Fast lookup (HashMaps)  
+
+Efficient traversal (BFS)  
+
+Scalability (graph-based design)  
+
+ 
+
+📊 Complexity Analysis (VERY IMPORTANT) 
+
+BFS Traversal 
+
+Let: 
+
+V = number of nodes (recipes + ingredients + tags)  
+
+E = number of edges  
+
+Time Complexity: 
+
+O(V + E) 
+
+Explanation: 
+Each node and edge is visited at most once during BFS traversal. 
+
+ 
+
+Jaccard Similarity 
+
+Let: 
+
+n = number of ingredients in recipe A  
+
+m = number of ingredients in recipe B  
+
+Time Complexity: 
+
+O(n + m) 
+
+Explanation: 
+Set intersection and union operations are linear in the size of input sets. 
+
+ 
+
+HashMap Lookup 
+
+O(1) 
+
+Average-case constant time for ingredient and recipe lookup. 
+
+ 
+
+Overall System Performance 
+
+The system achieves efficient performance by combining: 
+
+Constant-time lookups  
+
+Linear-time graph traversal  
+
+Set-based similarity computation  
+
+This ensures scalability for large datasets. 
+
+ 
+
+🇦🇲 Հայերեն Տարբերակ 
+
+🔹 Նախագծի կարճ նկարագրություն 
+
+Այս նախագիծը ներկայացնում է բաղադրատոմսերի և բաղադրիչների գիտելիքային գրաֆ, որը մոդելավորում է բաղադրատոմսերի, բաղադրիչների և թեգերի միջև կապերը։ Համակարգը թույլ է տալիս պարզել, թե ինչ կարելի է պատրաստել առկա բաղադրիչներով, գտնել նմանատիպ բաղադրատոմսեր և ուսումնասիրել փոխարինումներ։ 
+
+ 
+
+🎯 Նպատակները 
+
+Կառուցել գրաֆ երեք տիպի հանգույցներով՝ Recipe, Ingredient, Tag  
+
+Մոդելավորել կապերը ուղղված եզրերով  
+
+Բեռնել տվյալներ JSON ֆայլից  
+
+Իրականացնել BFS ալգորիթմ  
+
+Հաշվել նմանություն (Jaccard)  
+
+Ապահովել հարցումների համակարգ  
+
+Մշակել edge cases  
+
+ 
+
+🧠 Տվյալների կառուցվածքներ և ալգորիթմներ 
+
+HashMap → արագ որոնում (O(1))  
+
+Set → եզակի արժեքներ  
+
+Graph → adjacency list  
+
+BFS → գրաֆի անցում  
+
+Jaccard → նմանության հաշվարկ  
+
+ 
+
+⚙️ Ընդհանուր մոտեցում 
+
+Համակարգը կառուցում է ուղղված գրաֆ, որտեղ բաղադրատոմսերը կապված են իրենց բաղադրիչների և թեգերի հետ։ Օգտատիրոջ մուտքագրած բաղադրիչների հիման վրա կատարվում է BFS անցում՝ գտնելու համապատասխան բաղադրատոմսեր։ 
+
+ 
+
+📊 Բարդության վերլուծություն 
+
+BFS 
+
+O(V + E) 
+
+Jaccard 
+
+O(n + m) 
+
+HashMap 
+
+O(1) 
+
+ 
+
+ 
+
+ 
+
+I implemented a knowledge graph using BFS, Jaccard similarity, and efficient data structures, and also added a meal planner as a bonus feature. 
